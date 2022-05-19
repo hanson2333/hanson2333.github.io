@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Hexo</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="Hexo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="1. 继承1.1 继承的实现（掌握） 继承的概念  继承是面向对象三大特征之一，可以使得子类具有父类的属性和方法，还可以在子类中重新定义，以及追加属性和方法   实现继承的格式  继承通过extends实现 格式：class 子类 extends 父类 { }  举例：class Dog extends Animal { }     继承带来的好处  继承可以让类与类之间产生关系，子父类关系，产生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/05/19/day02-%E7%BB%A7%E6%89%BF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. 继承1.1 继承的实现（掌握） 继承的概念  继承是面向对象三大特征之一，可以使得子类具有父类的属性和方法，还可以在子类中重新定义，以及追加属性和方法   实现继承的格式  继承通过extends实现 格式：class 子类 extends 父类 { }  举例：class Dog extends Animal { }     继承带来的好处  继承可以让类与类之间产生关系，子父类关系，产生">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/.%5Cimg%5C01_super%E5%86%85%E5%AD%98%E5%9B%BE.png">
+<meta property="og:image" content="http://example.com/.%5Cimg%5C02_%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6.png">
+<meta property="article:published_time" content="2022-05-19T03:06:21.350Z">
+<meta property="article:modified_time" content="2022-05-06T08:13:55.186Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/.%5Cimg%5C01_super%E5%86%85%E5%AD%98%E5%9B%BE.png">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>John Doe</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yelog/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/u/2307534817"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="https://www.jianshu.com/u/ff56736de7cf"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+               href="https://www.zhihu.com/people/jaytp/activities"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:jaytp@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(3)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="3">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="All "
+           href="/2022/05/19/day02-%E7%BB%A7%E6%89%BF/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2022-05-19 11:06:21">2022/05/19</span>
+        </a>
+        
+        <a  class="All "
+           href="/2022/05/19/test/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="test">test</span>
+            <span class="post-date" title="2022-05-19 11:05:28">2022/05/19</span>
+        </a>
+        
+        <a  class="All "
+           href="/2022/05/18/hello-world/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2022-05-18 16:23:50">2022/05/18</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-day02-继承" class="article article-type-post" itemscope itemprop="blogPost">
+    
+    <div class="article-meta">
+        
+        
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2022-05-06 16:13:55'>2022-05-19 11:06</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BB%A7%E6%89%BF"><span class="toc-text">1. 继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BB%A7%E6%89%BF%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="toc-text">1.1 继承的实现（掌握）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%BB%A7%E6%89%BF%E7%9A%84%E5%A5%BD%E5%A4%84%E5%92%8C%E5%BC%8A%E7%AB%AF%EF%BC%88%E7%90%86%E8%A7%A3%EF%BC%89"><span class="toc-text">1.2 继承的好处和弊端（理解）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-Java%E4%B8%AD%E7%BB%A7%E6%89%BF%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%88%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="toc-text">1.3. Java中继承的特点（掌握）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84%E6%88%90%E5%91%98%E8%AE%BF%E9%97%AE%E7%89%B9%E7%82%B9"><span class="toc-text">2. 继承中的成员访问特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%BB%A7%E6%89%BF%E4%B8%AD%E5%8F%98%E9%87%8F%E7%9A%84%E8%AE%BF%E9%97%AE%E7%89%B9%E7%82%B9%EF%BC%88%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="toc-text">2.1 继承中变量的访问特点（掌握）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-super%EF%BC%88%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="toc-text">2.2 super（掌握）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E7%BB%A7%E6%89%BF%E4%B8%AD%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E7%9A%84%E8%AE%BF%E9%97%AE%E7%89%B9%E7%82%B9%EF%BC%88%E7%90%86%E8%A7%A3%EF%BC%89"><span class="toc-text">2.3 继承中构造方法的访问特点（理解）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E7%BB%A7%E6%89%BF%E4%B8%AD%E6%88%90%E5%91%98%E6%96%B9%E6%B3%95%E7%9A%84%E8%AE%BF%E9%97%AE%E7%89%B9%E7%82%B9%EF%BC%88%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="toc-text">2.4 继承中成员方法的访问特点（掌握）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-super%E5%86%85%E5%AD%98%E5%9B%BE%EF%BC%88%E7%90%86%E8%A7%A3%EF%BC%89"><span class="toc-text">2.5 super内存图（理解）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%EF%BC%88%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="toc-text">2.6 方法重写（掌握）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%EF%BC%88%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="toc-text">2.7 方法重写的注意事项（掌握）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6-%E7%90%86%E8%A7%A3"><span class="toc-text">2.8 权限修饰符 (理解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9-%E9%BB%91%E9%A9%AC%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E7%BB%A7%E6%89%BF%E6%94%B9%E8%BF%9B-%E6%8E%8C%E6%8F%A1"><span class="toc-text">2.9 黑马信息管理系统使用继承改进 (掌握)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="toc-text">3.抽象类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E6%A6%82%E8%BF%B0%EF%BC%88%E7%90%86%E8%A7%A3%EF%BC%89"><span class="toc-text">3.1抽象类的概述（理解）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E7%89%B9%E7%82%B9%EF%BC%88%E8%AE%B0%E5%BF%86%EF%BC%89"><span class="toc-text">3.2抽象类的特点（记忆）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E6%A1%88%E4%BE%8B%EF%BC%88%E5%BA%94%E7%94%A8%EF%BC%89"><span class="toc-text">3.3抽象类的案例（应用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4%E6%A8%A1%E6%9D%BF%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">3.4模板设计模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5final%EF%BC%88%E5%BA%94%E7%94%A8%EF%BC%89"><span class="toc-text">3.5final（应用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6%E9%BB%91%E9%A9%AC%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%94%B9%E8%BF%9B-%E5%BA%94%E7%94%A8"><span class="toc-text">3.6黑马信息管理系统使用抽象类改进 (应用)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="toc-text">4.代码块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E4%BB%A3%E7%A0%81%E5%9D%97%E6%A6%82%E8%BF%B0-%E7%90%86%E8%A7%A3"><span class="toc-text">4.1代码块概述 (理解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2%E4%BB%A3%E7%A0%81%E5%9D%97%E5%88%86%E7%B1%BB-%E7%90%86%E8%A7%A3"><span class="toc-text">4.2代码块分类 (理解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3%E9%BB%91%E9%A9%AC%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%9D%97%E6%94%B9%E8%BF%9B-%E5%BA%94%E7%94%A8"><span class="toc-text">4.3黑马信息管理系统使用代码块改进 (应用)</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-继承"><a href="#1-继承" class="headerlink" title="1. 继承"></a>1. 继承</h2><h3 id="1-1-继承的实现（掌握）"><a href="#1-1-继承的实现（掌握）" class="headerlink" title="1.1 继承的实现（掌握）"></a>1.1 继承的实现（掌握）</h3><ul>
+<li><p>继承的概念</p>
+<ul>
+<li>继承是面向对象三大特征之一，可以使得子类具有父类的属性和方法，还可以在子类中重新定义，以及追加属性和方法</li>
+</ul>
+</li>
+<li><p>实现继承的格式</p>
+<ul>
+<li>继承通过extends实现</li>
+<li>格式：class 子类 extends 父类 { } <ul>
+<li>举例：class Dog extends Animal { }</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>继承带来的好处</p>
+<ul>
+<li>继承可以让类与类之间产生关系，子父类关系，产生子父类后，子类则可以使用父类中非私有的成员。</li>
+</ul>
+</li>
+<li><p>示例代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Fu</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;show方法被调用&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Zi</span> <span class="keyword">extends</span> <span class="title class_">Fu</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;method方法被调用&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//创建对象，调用方法</span></span><br><span class="line">        <span class="type">Fu</span> <span class="variable">f</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Fu</span>();</span><br><span class="line">        f.show();</span><br><span class="line"></span><br><span class="line">        <span class="type">Zi</span> <span class="variable">z</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Zi</span>();</span><br><span class="line">        z.method();</span><br><span class="line">        z.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="1-2-继承的好处和弊端（理解）"><a href="#1-2-继承的好处和弊端（理解）" class="headerlink" title="1.2 继承的好处和弊端（理解）"></a>1.2 继承的好处和弊端（理解）</h3><ul>
+<li>继承好处<ul>
+<li>提高了代码的复用性(多个类相同的成员可以放到同一个类中)</li>
+<li>提高了代码的维护性(如果方法的代码需要修改，修改一处即可)</li>
+</ul>
+</li>
+<li>继承弊端<ul>
+<li>继承让类与类之间产生了关系，类的耦合性增强了，当父类发生变化时子类实现也不得不跟着变化，削弱了子类的独立性</li>
+</ul>
+</li>
+<li>继承的应用场景：<ul>
+<li>使用继承，需要考虑类与类之间是否存在is..a的关系，不能盲目使用继承<ul>
+<li>is..a的关系：谁是谁的一种，例如：老师和学生是人的一种，那人就是父类，学生和老师就是子类</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-Java中继承的特点（掌握）"><a href="#1-3-Java中继承的特点（掌握）" class="headerlink" title="1.3. Java中继承的特点（掌握）"></a>1.3. Java中继承的特点（掌握）</h3><ul>
+<li><p>Java中继承的特点</p>
+<ol>
+<li>Java中类只支持单继承，不支持多继承<ul>
+<li>错误范例：class A extends B, C { }</li>
+</ul>
+</li>
+<li>Java中类支持多层继承</li>
+</ol>
+</li>
+<li><p>多层继承示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Granddad</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drink</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;爷爷爱喝酒&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Father</span> <span class="keyword">extends</span> <span class="title class_">Granddad</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">smoke</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;爸爸爱抽烟&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Mother</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">dance</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;妈妈爱跳舞&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Son</span> <span class="keyword">extends</span> <span class="title class_">Father</span> &#123;</span><br><span class="line">	<span class="comment">// 此时，Son类中就同时拥有drink方法以及smoke方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-继承中的成员访问特点"><a href="#2-继承中的成员访问特点" class="headerlink" title="2. 继承中的成员访问特点"></a>2. 继承中的成员访问特点</h2><h3 id="2-1-继承中变量的访问特点（掌握）"><a href="#2-1-继承中变量的访问特点（掌握）" class="headerlink" title="2.1 继承中变量的访问特点（掌握）"></a>2.1 继承中变量的访问特点（掌握）</h3><p>在子类方法中访问一个变量，采用的是就近原则。</p>
+<ol>
+<li>子类局部范围找</li>
+<li>子类成员范围找</li>
+<li>父类成员范围找</li>
+<li>如果都没有就报错(不考虑父亲的父亲…)</li>
+</ol>
+<ul>
+<li><p>示例代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Fu</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Zi</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Zi</span> <span class="variable">z</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Zi</span>();</span><br><span class="line">        z.show();	<span class="comment">// 输出show方法中的局部变量30</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-2-super（掌握）"><a href="#2-2-super（掌握）" class="headerlink" title="2.2 super（掌握）"></a>2.2 super（掌握）</h3><ul>
+<li>this&amp;super关键字：<ul>
+<li>this：代表本类对象的引用</li>
+<li>super：代表父类存储空间的标识(可以理解为父类对象引用)</li>
+</ul>
+</li>
+<li>this和super的使用分别<ul>
+<li>成员变量：<ul>
+<li>this.成员变量    -   访问本类成员变量</li>
+<li>super.成员变量 -   访问父类成员变量</li>
+</ul>
+</li>
+<li>成员方法：<ul>
+<li>this.成员方法  - 访问本类成员方法</li>
+<li>super.成员方法 - 访问父类成员方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>构造方法：<ul>
+<li>this(…)  -  访问本类构造方法</li>
+<li>super(…)  -  访问父类构造方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-继承中构造方法的访问特点（理解）"><a href="#2-3-继承中构造方法的访问特点（理解）" class="headerlink" title="2.3 继承中构造方法的访问特点（理解）"></a>2.3 继承中构造方法的访问特点（理解）</h3><p><strong>注意：子类中所有的构造方法默认都会访问父类中无参的构造方法</strong></p>
+<p>​	子类会继承父类中的数据，可能还会使用父类的数据。所以，子类初始化之前，一定要先完成父类数据的初始化，原因在于，每一个子类构造方法的第一条语句默认都是：super()</p>
+<p><strong>问题：如果父类中没有无参构造方法，只有带参构造方法，该怎么办呢？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 通过使用super关键字去显示的调用父类的带参构造方法</span><br><span class="line">2. 子类通过this去调用本类的其他构造方法,本类其他构造方法再通过super去手动调用父类的带参的构造方法</span><br><span class="line"></span><br><span class="line">注意: this(…)super(…) 必须放在构造方法的第一行有效语句，并且二者不能共存</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-继承中成员方法的访问特点（掌握）"><a href="#2-4-继承中成员方法的访问特点（掌握）" class="headerlink" title="2.4 继承中成员方法的访问特点（掌握）"></a>2.4 继承中成员方法的访问特点（掌握）</h3><p>通过子类对象访问一个方法</p>
+<ol>
+<li>子类成员范围找</li>
+<li>父类成员范围找</li>
+<li>如果都没有就报错(不考虑父亲的父亲…)</li>
+</ol>
+<h3 id="2-5-super内存图（理解）"><a href="#2-5-super内存图（理解）" class="headerlink" title="2.5 super内存图（理解）"></a>2.5 super内存图（理解）</h3><ul>
+<li><p>对象在堆内存中，会单独存在一块super区域，用来存放父类的数据 </p>
+<p><img src="/.%5Cimg%5C01_super%E5%86%85%E5%AD%98%E5%9B%BE.png" alt="01_super内存图"></p>
+</li>
+</ul>
+<h3 id="2-6-方法重写（掌握）"><a href="#2-6-方法重写（掌握）" class="headerlink" title="2.6 方法重写（掌握）"></a>2.6 方法重写（掌握）</h3><ul>
+<li>1、方法重写概念<ul>
+<li>子类出现了和父类中一模一样的方法声明（方法名一样，参数列表也必须一样）</li>
+</ul>
+</li>
+<li>2、方法重写的应用场景<ul>
+<li>当子类需要父类的功能，而功能主体子类有自己特有内容时，可以重写父类中的方法，这样，即沿袭了父类的功能，又定义了子类特有的内容</li>
+</ul>
+</li>
+<li>3、Override注解<ul>
+<li>用来检测当前的方法，是否是重写的方法，起到【校验】的作用</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-7-方法重写的注意事项（掌握）"><a href="#2-7-方法重写的注意事项（掌握）" class="headerlink" title="2.7 方法重写的注意事项（掌握）"></a>2.7 方法重写的注意事项（掌握）</h3><ul>
+<li>方法重写的注意事项</li>
+</ul>
+<ol>
+<li>私有方法不能被重写(父类私有成员子类是不能继承的)</li>
+<li>子类方法访问权限不能更低(public &gt; 默认 &gt; 私有)</li>
+<li>静态方法不能被重写,如果子类也有相同的方法,并不是重写的父类的方法</li>
+</ol>
+<ul>
+<li>示例代码</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Fu</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Fu中show()方法被调用&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Fu中method()方法被调用&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Zi</span> <span class="keyword">extends</span> <span class="title class_">Fu</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 编译【出错】，子类不能重写父类私有的方法*/</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Zi中show()方法被调用&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    <span class="comment">/* 编译【出错】，子类重写父类方法的时候，访问权限需要大于等于父类 */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Zi中method()方法被调用&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 编译【通过】，子类重写父类方法的时候，访问权限需要大于等于父类 */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Zi中method()方法被调用&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-8-权限修饰符-理解"><a href="#2-8-权限修饰符-理解" class="headerlink" title="2.8 权限修饰符 (理解)"></a>2.8 权限修饰符 (理解)</h3><p><img src="/.%5Cimg%5C02_%E6%9D%83%E9%99%90%E4%BF%AE%E9%A5%B0%E7%AC%A6.png" alt="02_权限修饰符"></p>
+<h3 id="2-9-黑马信息管理系统使用继承改进-掌握"><a href="#2-9-黑马信息管理系统使用继承改进-掌握" class="headerlink" title="2.9 黑马信息管理系统使用继承改进 (掌握)"></a>2.9 黑马信息管理系统使用继承改进 (掌握)</h3><ul>
+<li><p>需求</p>
+<p>把学生类和老师类共性的内容向上抽取,抽取到出一个 Person 父类,让学生类和老师类继承 Person 类</p>
+</li>
+<li><p>实现步骤</p>
+<ol>
+<li><p>抽取Person类</p>
+</li>
+<li><p>优化StudentController类中，inputStudentInfo方法，将setXxx赋值方式，改进为构造方法初始化</p>
+<p>注意：直接修改这种操作方式，不符合我们开发中的一个原则</p>
+<p>​	开闭原则 ( 对扩展开放对修改关闭 ) : 尽量在不更改原有代码的前提下以完成需求 </p>
+<p>解决：重新创建一个OtherStudentController类</p>
+<p>编写新的inputStudentInfo方法</p>
+</li>
+<li><p>根据StudentController类、OtherStudentController类，向上抽取出BaseStudentController类<br>再让StudentController类、OtherStudentController类，继承BaseStudentController类</p>
+</li>
+</ol>
+</li>
+<li><p>代码实现</p>
+<p>Person类及学生类和老师类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String age;</span><br><span class="line">    <span class="keyword">private</span> String birthday;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String id, String name, String age, String birthday)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">        <span class="built_in">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(String id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(String age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getBirthday</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> birthday;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBirthday</span><span class="params">(String birthday)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.birthday = birthday;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Student类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String id, String name, String age, String birthday)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(id, name, age, birthday);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Teacher类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Teacher</span> <span class="keyword">extends</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Teacher</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Teacher</span><span class="params">(String id, String name, String age, String birthday)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(id, name, age, birthday);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>BaseStudentController类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">BaseStudentController</span> &#123;</span><br><span class="line">    <span class="comment">// 业务员对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">StudentService</span> <span class="variable">studentService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StudentService</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开启学生管理系统, 并展示学生管理系统菜单</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//Scanner sc = new Scanner(System.in);</span></span><br><span class="line">        studentLoop:</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------欢迎来到 &lt;学生&gt; 管理系统--------&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;请输入您的选择: 1.添加学生  2.删除学生  3.修改学生  4.查看学生  5.退出&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">choice</span> <span class="operator">=</span> sc.next();</span><br><span class="line">            <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                    <span class="comment">// System.out.println(&quot;添加&quot;);</span></span><br><span class="line">                    addStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;2&quot;</span>:</span><br><span class="line">                    <span class="comment">// System.out.println(&quot;删除&quot;);</span></span><br><span class="line">                    deleteStudentById();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;3&quot;</span>:</span><br><span class="line">                    <span class="comment">// System.out.println(&quot;修改&quot;);</span></span><br><span class="line">                    updateStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;4&quot;</span>:</span><br><span class="line">                    <span class="comment">// System.out.println(&quot;查询&quot;);</span></span><br><span class="line">                    findAllStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;5&quot;</span>:</span><br><span class="line">                    System.out.println(<span class="string">&quot;感谢您使用学生管理系统, 再见!&quot;</span>);</span><br><span class="line">                    <span class="keyword">break</span> studentLoop;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    System.out.println(<span class="string">&quot;您的输入有误, 请重新输入&quot;</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改学生方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateStudent</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">updateId</span> <span class="operator">=</span> inputStudentId();</span><br><span class="line">        <span class="type">Student</span> <span class="variable">newStu</span> <span class="operator">=</span> inputStudentInfo(updateId);</span><br><span class="line">        studentService.updateStudent(updateId, newStu);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;修改成功!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除学生方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">deleteStudentById</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">delId</span> <span class="operator">=</span> inputStudentId();</span><br><span class="line">        <span class="comment">// 3. 调用业务员中的deleteStudentById根据id, 删除学生</span></span><br><span class="line">        studentService.deleteStudentById(delId);</span><br><span class="line">        <span class="comment">// 4. 提示删除成功</span></span><br><span class="line">        System.out.println(<span class="string">&quot;删除成功!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看学生方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">findAllStudent</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 调用业务员中的获取方法, 得到学生的对象数组</span></span><br><span class="line">        Student[] stus = studentService.findAllStudent();</span><br><span class="line">        <span class="comment">// 2. 判断数组的内存地址, 是否为null</span></span><br><span class="line">        <span class="keyword">if</span> (stus ** <span class="literal">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;查无信息, 请添加后重试&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 3. 遍历数组, 获取学生信息并打印在控制台</span></span><br><span class="line">        System.out.println(<span class="string">&quot;学号\t\t姓名\t年龄\t生日&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> stus[i];</span><br><span class="line">            <span class="keyword">if</span> (stu != <span class="literal">null</span>) &#123;</span><br><span class="line">                System.out.println(stu.getId() + <span class="string">&quot;\t&quot;</span> + stu.getName() + <span class="string">&quot;\t&quot;</span> + stu.getAge() + <span class="string">&quot;\t\t&quot;</span> + stu.getBirthday());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加学生方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addStudent</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// StudentService studentService = new StudentService();</span></span><br><span class="line">        <span class="comment">// 1. 键盘接收学生信息</span></span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;请输入学生id:&quot;</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> studentService.isExists(id);</span><br><span class="line">            <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;学号已被占用, 请重新输入&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> inputStudentInfo(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 将学生对象,传递给StudentService(业务员)中的addStudent方法</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> studentService.addStudent(stu);</span><br><span class="line">        <span class="comment">// 4. 根据返回的boolean类型结果, 在控制台打印成功\失败</span></span><br><span class="line">        <span class="keyword">if</span> (result) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;添加成功&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;添加失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 键盘录入学生id</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">inputStudentId</span><span class="params">()</span> &#123;</span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;请输入学生id:&quot;</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">exists</span> <span class="operator">=</span> studentService.isExists(id);</span><br><span class="line">            <span class="keyword">if</span> (!exists) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;您输入的id不存在, 请重新输入:&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 键盘录入学生信息</span></span><br><span class="line">    <span class="comment">// 开闭原则: 对扩展内容开放, 对修改内容关闭</span></span><br><span class="line">  <span class="keyword">public</span> Student <span class="title function_">inputStudentInfo</span><span class="params">(String id)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>StudentController类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StudentController</span> <span class="keyword">extends</span> <span class="title class_">BaseStudentController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 键盘录入学生信息</span></span><br><span class="line">    <span class="comment">// 开闭原则: 对扩展内容开放, 对修改内容关闭</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Student <span class="title function_">inputStudentInfo</span><span class="params">(String id)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入学生姓名:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> sc.next();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入学生年龄:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">age</span> <span class="operator">=</span> sc.next();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入学生生日:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">birthday</span> <span class="operator">=</span> sc.next();</span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">        stu.setId(id);</span><br><span class="line">        stu.setName(name);</span><br><span class="line">        stu.setAge(age);</span><br><span class="line">        stu.setBirthday(birthday);</span><br><span class="line">        <span class="keyword">return</span> stu;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>OtherStudentController类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OtherStudentController</span> <span class="keyword">extends</span> <span class="title class_">BaseStudentController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 键盘录入学生信息</span></span><br><span class="line">    <span class="comment">// 开闭原则: 对扩展内容开放, 对修改内容关闭</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Student <span class="title function_">inputStudentInfo</span><span class="params">(String id)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入学生姓名:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> sc.next();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入学生年龄:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">age</span> <span class="operator">=</span> sc.next();</span><br><span class="line">        System.out.println(<span class="string">&quot;请输入学生生日:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">birthday</span> <span class="operator">=</span> sc.next();</span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(id,name,age,birthday);</span><br><span class="line">        <span class="keyword">return</span> stu;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="3-抽象类"><a href="#3-抽象类" class="headerlink" title="3.抽象类"></a>3.抽象类</h2><h3 id="3-1抽象类的概述（理解）"><a href="#3-1抽象类的概述（理解）" class="headerlink" title="3.1抽象类的概述（理解）"></a>3.1抽象类的概述（理解）</h3><p>​	当我们在做子类共性功能抽取时，有些方法在父类中并没有具体的体现，这个时候就需要抽象类了！</p>
+<p>​	在Java中，一个没有方法体的方法应该定义为抽象方法，而类中如果有抽象方法，该类必须定义为抽象类！</p>
+<h3 id="3-2抽象类的特点（记忆）"><a href="#3-2抽象类的特点（记忆）" class="headerlink" title="3.2抽象类的特点（记忆）"></a>3.2抽象类的特点（记忆）</h3><ul>
+<li><p>抽象类和抽象方法必须使用 abstract 关键字修饰</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//抽象类的定义</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> class 类名 &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//抽象方法的定义</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>抽象类中不一定有抽象方法，有抽象方法的类一定是抽象类</p>
+</li>
+<li><p>抽象类不能实例化</p>
+</li>
+<li><p>抽象类可以有构造方法</p>
+</li>
+<li><p>抽象类的子类</p>
+<p>​	要么重写抽象类中的所有抽象方法</p>
+<p>​	要么是抽象类</p>
+</li>
+</ul>
+<h3 id="3-3抽象类的案例（应用）"><a href="#3-3抽象类的案例（应用）" class="headerlink" title="3.3抽象类的案例（应用）"></a>3.3抽象类的案例（应用）</h3><ul>
+<li><p>案例需求</p>
+<p>​	定义猫类(Cat)和狗类(Dog)</p>
+<p>​	猫类成员方法：eat（猫吃鱼）drink（喝水…）</p>
+<p>​	狗类成员方法：eat（狗吃肉）drink（喝水…）</p>
+</li>
+<li><p>实现步骤</p>
+<ol>
+<li>猫类和狗类中存在共性内容，应向上抽取出一个动物类（Animal）</li>
+<li>父类Animal中，无法将 eat 方法具体实现描述清楚，所以定义为抽象方法</li>
+<li>抽象方法需要存活在抽象类中，将Animal定义为抽象类</li>
+<li>让 Cat 和 Dog 分别继承 Animal，重写eat方法</li>
+<li>测试类中创建 Cat 和 Dog 对象，调用方法测试</li>
+</ol>
+</li>
+<li><p>代码实现</p>
+<ul>
+<li>动物类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drink</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;喝水&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Animal</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>猫类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Cat</span> <span class="keyword">extends</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;猫吃鱼&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>狗类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dog</span> <span class="keyword">extends</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;狗吃肉&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>测试类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Dog</span> <span class="variable">d</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dog</span>();</span><br><span class="line">        d.eat();</span><br><span class="line">        d.drink();</span><br><span class="line"></span><br><span class="line">        <span class="type">Cat</span> <span class="variable">c</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Cat</span>();</span><br><span class="line">        c.drink();</span><br><span class="line">        c.eat();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Animal a = new Animal();</span></span><br><span class="line">        <span class="comment">//a.eat();</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-4模板设计模式"><a href="#3-4模板设计模式" class="headerlink" title="3.4模板设计模式"></a>3.4模板设计模式</h3><ul>
+<li><p>设计模式</p>
+<p>设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。<br>使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性、程序的重用性。</p>
+</li>
+<li><p>模板设计模式</p>
+<p>把抽象类整体就可以看做成一个模板，模板中不能决定的东西定义成抽象方法<br>让使用模板的类（继承抽象类的类）去重写抽象方法实现需求</p>
+</li>
+<li><p>模板设计模式的优势</p>
+<p>模板已经定义了通用结构，使用者只需要关心自己需要实现的功能即可</p>
+</li>
+<li><p>示例代码</p>
+<p>模板类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    作文模板类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">CompositionTemplate</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">write</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;&lt;&lt;我的爸爸&gt;&gt;&quot;</span>);</span><br><span class="line"></span><br><span class="line">        body();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;啊~ 这就是我的爸爸&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">body</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现类A</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tom</span> <span class="keyword">extends</span> <span class="title class_">CompositionTemplate</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">body</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;那是一个秋天, 风儿那么缠绵,记忆中, &quot;</span> +</span><br><span class="line">                <span class="string">&quot;那天爸爸骑车接我放学回家,我的脚卡在了自行车链当中, 爸爸蹬不动,他就站起来蹬...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现类B</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Tony</span> <span class="keyword">extends</span> <span class="title class_">CompositionTemplate</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">body</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*public void write()&#123;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Tom</span> <span class="variable">t</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Tom</span>();</span><br><span class="line">        t.write();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-5final（应用）"><a href="#3-5final（应用）" class="headerlink" title="3.5final（应用）"></a>3.5final（应用）</h3><ul>
+<li><p>fianl关键字的作用</p>
+<ul>
+<li>final代表最终的意思，可以修饰成员方法，成员变量，类</li>
+</ul>
+</li>
+<li><p>final修饰类、方法、变量的效果  </p>
+<ul>
+<li><p>fianl修饰类：该类不能被继承（不能有子类，但是可以有父类）</p>
+</li>
+<li><p>final修饰方法：该方法不能被重写</p>
+</li>
+<li><p>final修饰变量：表明该变量是一个常量，不能再次赋值</p>
+<ul>
+<li><p>变量是基本类型,不能改变的是值</p>
+</li>
+<li><p>变量是引用类型,不能改变的是地址值,但地址里面的内容是可以改变的</p>
+</li>
+<li><p>举例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">23</span>);</span><br><span class="line">  	s = <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">24</span>);  <span class="comment">// 错误</span></span><br><span class="line"> 	s.setAge(<span class="number">24</span>);  <span class="comment">// 正确</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-6黑马信息管理系统使用抽象类改进-应用"><a href="#3-6黑马信息管理系统使用抽象类改进-应用" class="headerlink" title="3.6黑马信息管理系统使用抽象类改进 (应用)"></a>3.6黑马信息管理系统使用抽象类改进 (应用)</h3><ul>
+<li><p>需求</p>
+<ol>
+<li>使用抽象类的思想，将BaseStudentController 中的 inputStudentInfo 方法，定义为抽象方法</li>
+<li>将不希望子类重写的方法，使用 final 进行修饰</li>
+</ol>
+</li>
+<li><p>代码实现</p>
+<p>BaseStudentController类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">BaseStudentController</span> &#123;</span><br><span class="line">    <span class="comment">// 业务员对象</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">StudentService</span> <span class="variable">studentService</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StudentService</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">Scanner</span> <span class="variable">sc</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开启学生管理系统, 并展示学生管理系统菜单</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">start</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//Scanner sc = new Scanner(System.in);</span></span><br><span class="line">        studentLoop:</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;--------欢迎来到 &lt;学生&gt; 管理系统--------&quot;</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;请输入您的选择: 1.添加学生  2.删除学生  3.修改学生  4.查看学生  5.退出&quot;</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">choice</span> <span class="operator">=</span> sc.next();</span><br><span class="line">            <span class="keyword">switch</span> (choice) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                    <span class="comment">// System.out.println(&quot;添加&quot;);</span></span><br><span class="line">                    addStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;2&quot;</span>:</span><br><span class="line">                    <span class="comment">// System.out.println(&quot;删除&quot;);</span></span><br><span class="line">                    deleteStudentById();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;3&quot;</span>:</span><br><span class="line">                    <span class="comment">// System.out.println(&quot;修改&quot;);</span></span><br><span class="line">                    updateStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;4&quot;</span>:</span><br><span class="line">                    <span class="comment">// System.out.println(&quot;查询&quot;);</span></span><br><span class="line">                    findAllStudent();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;5&quot;</span>:</span><br><span class="line">                    System.out.println(<span class="string">&quot;感谢您使用学生管理系统, 再见!&quot;</span>);</span><br><span class="line">                    <span class="keyword">break</span> studentLoop;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    System.out.println(<span class="string">&quot;您的输入有误, 请重新输入&quot;</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 修改学生方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">updateStudent</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">updateId</span> <span class="operator">=</span> inputStudentId();</span><br><span class="line">        <span class="type">Student</span> <span class="variable">newStu</span> <span class="operator">=</span> inputStudentInfo(updateId);</span><br><span class="line">        studentService.updateStudent(updateId, newStu);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;修改成功!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除学生方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">deleteStudentById</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">delId</span> <span class="operator">=</span> inputStudentId();</span><br><span class="line">        <span class="comment">// 3. 调用业务员中的deleteStudentById根据id, 删除学生</span></span><br><span class="line">        studentService.deleteStudentById(delId);</span><br><span class="line">        <span class="comment">// 4. 提示删除成功</span></span><br><span class="line">        System.out.println(<span class="string">&quot;删除成功!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看学生方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">findAllStudent</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 调用业务员中的获取方法, 得到学生的对象数组</span></span><br><span class="line">        Student[] stus = studentService.findAllStudent();</span><br><span class="line">        <span class="comment">// 2. 判断数组的内存地址, 是否为null</span></span><br><span class="line">        <span class="keyword">if</span> (stus ** <span class="literal">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;查无信息, 请添加后重试&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 3. 遍历数组, 获取学生信息并打印在控制台</span></span><br><span class="line">        System.out.println(<span class="string">&quot;学号\t\t姓名\t年龄\t生日&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> stus[i];</span><br><span class="line">            <span class="keyword">if</span> (stu != <span class="literal">null</span>) &#123;</span><br><span class="line">                System.out.println(stu.getId() + <span class="string">&quot;\t&quot;</span> + stu.getName() + <span class="string">&quot;\t&quot;</span> + stu.getAge() + <span class="string">&quot;\t\t&quot;</span> + stu.getBirthday());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加学生方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">addStudent</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// StudentService studentService = new StudentService();</span></span><br><span class="line">        <span class="comment">// 1. 键盘接收学生信息</span></span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;请输入学生id:&quot;</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> studentService.isExists(id);</span><br><span class="line">            <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;学号已被占用, 请重新输入&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> inputStudentInfo(id);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 将学生对象,传递给StudentService(业务员)中的addStudent方法</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> studentService.addStudent(stu);</span><br><span class="line">        <span class="comment">// 4. 根据返回的boolean类型结果, 在控制台打印成功\失败</span></span><br><span class="line">        <span class="keyword">if</span> (result) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;添加成功&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;添加失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 键盘录入学生id</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">inputStudentId</span><span class="params">()</span> &#123;</span><br><span class="line">        String id;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;请输入学生id:&quot;</span>);</span><br><span class="line">            id = sc.next();</span><br><span class="line">            <span class="type">boolean</span> <span class="variable">exists</span> <span class="operator">=</span> studentService.isExists(id);</span><br><span class="line">            <span class="keyword">if</span> (!exists) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;您输入的id不存在, 请重新输入:&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 键盘录入学生信息</span></span><br><span class="line">    <span class="comment">// 开闭原则: 对扩展内容开放, 对修改内容关闭</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">abstract</span> Student <span class="title function_">inputStudentInfo</span><span class="params">(String id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-代码块"><a href="#4-代码块" class="headerlink" title="4.代码块"></a>4.代码块</h2><h3 id="4-1代码块概述-理解"><a href="#4-1代码块概述-理解" class="headerlink" title="4.1代码块概述 (理解)"></a>4.1代码块概述 (理解)</h3><p>在Java中，使用 { } 括起来的代码被称为代码块</p>
+<h3 id="4-2代码块分类-理解"><a href="#4-2代码块分类-理解" class="headerlink" title="4.2代码块分类 (理解)"></a>4.2代码块分类 (理解)</h3><ul>
+<li><p>局部代码块</p>
+<ul>
+<li><p>位置: 方法中定义</p>
+</li>
+<li><p>作用: 限定变量的生命周期，及早释放，提高内存利用率</p>
+</li>
+<li><p>示例代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        局部代码块</span></span><br><span class="line"><span class="comment">            位置：方法中定义</span></span><br><span class="line"><span class="comment">            作用：限定变量的生命周期，及早释放，提高内存利用率</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">            System.out.println(a);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">       <span class="comment">// System.out.println(a);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>构造代码块</p>
+<ul>
+<li><p>位置: 类中方法外定义</p>
+</li>
+<li><p>特点: 每次构造方法执行的时，都会执行该代码块中的代码，并且在构造方法执行前执行</p>
+</li>
+<li><p>作用: 将多个构造方法中相同的代码，抽取到构造代码块中，提高代码的复用性</p>
+</li>
+<li><p>示例代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        构造代码块:</span></span><br><span class="line"><span class="comment">            位置：类中方法外定义</span></span><br><span class="line"><span class="comment">            特点：每次构造方法执行的时，都会执行该代码块中的代码，并且在构造方法执行前执行</span></span><br><span class="line"><span class="comment">            作用：将多个构造方法中相同的代码，抽取到构造代码块中，提高代码的复用性</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;好好学习&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;空参数构造方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(<span class="type">int</span> a)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;带参数构造方法...........&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>静态代码块</p>
+<ul>
+<li><p>位置: 类中方法外定义</p>
+</li>
+<li><p>特点: 需要通过static关键字修饰，随着类的加载而加载，并且只执行一次</p>
+</li>
+<li><p>作用: 在类加载的时候做一些数据初始化的操作</p>
+</li>
+<li><p>示例代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">        静态代码块:</span></span><br><span class="line"><span class="comment">            位置：类中方法外定义</span></span><br><span class="line"><span class="comment">            特点：需要通过static关键字修饰，随着类的加载而加载，并且只执行一次</span></span><br><span class="line"><span class="comment">            作用：在类加载的时候做一些数据初始化的操作</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是静态代码块, 我执行了&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是Person类的空参数构造方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(<span class="type">int</span> a)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;我是Person类的带...........参数构造方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3黑马信息管理系统使用代码块改进-应用"><a href="#4-3黑马信息管理系统使用代码块改进-应用" class="headerlink" title="4.3黑马信息管理系统使用代码块改进 (应用)"></a>4.3黑马信息管理系统使用代码块改进 (应用)</h3><ul>
+<li><p>需求</p>
+<p>使用静态代码块，初始化一些学生数据</p>
+</li>
+<li><p>实现步骤</p>
+<ol>
+<li>在StudentDao类中定义一个静态代码块，用来初始化一些学生数据</li>
+<li>将初始化好的学生数据存储到学生数组中</li>
+</ol>
+</li>
+<li><p>示例代码</p>
+<p>StudentDao类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StudentDao</span> &#123;</span><br><span class="line">    <span class="comment">// 创建学生对象数组</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Student[] stus = <span class="keyword">new</span> <span class="title class_">Student</span>[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;heima001&quot;</span>,<span class="string">&quot;张三&quot;</span>,<span class="string">&quot;23&quot;</span>,<span class="string">&quot;1999-11-11&quot;</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;heima002&quot;</span>,<span class="string">&quot;李四&quot;</span>,<span class="string">&quot;24&quot;</span>,<span class="string">&quot;2000-11-11&quot;</span>);</span><br><span class="line"></span><br><span class="line">        stus[<span class="number">0</span>] = stu1;</span><br><span class="line">        stus[<span class="number">1</span>] = stu2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加学生方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">addStudent</span><span class="params">(Student stu)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 添加学生到数组</span></span><br><span class="line">        <span class="comment">//2.1 定义变量index为-1，假设数组已经全部存满，没有null的元素</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">//2.2 遍历数组取出每一个元素，判断是否是null</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> stus[i];</span><br><span class="line">            <span class="keyword">if</span>(student ** <span class="literal">null</span>)&#123;</span><br><span class="line">                index = i;</span><br><span class="line">                <span class="comment">//2.3 如果为null，让index变量记录当前索引位置，并使用break结束循环遍历</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 返回是否添加成功的boolean类型状态</span></span><br><span class="line">        <span class="keyword">if</span>(index ** -<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="comment">// 装满了</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 没有装满, 正常添加, 返回true</span></span><br><span class="line">            stus[index] = stu;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查看学生方法</span></span><br><span class="line">    <span class="keyword">public</span> Student[] findAllStudent() &#123;</span><br><span class="line">        <span class="keyword">return</span> stus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">deleteStudentById</span><span class="params">(String delId)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 查找id在容器中所在的索引位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> getIndex(delId);</span><br><span class="line">        <span class="comment">// 2. 将该索引位置,使用null元素进行覆盖</span></span><br><span class="line">        stus[index] = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getIndex</span><span class="params">(String id)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; stus.length; i++) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> stus[i];</span><br><span class="line">            <span class="keyword">if</span>(stu != <span class="literal">null</span> &amp;&amp; stu.getId().equals(id))&#123;</span><br><span class="line">                index = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateStudent</span><span class="params">(String updateId, Student newStu)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 查找updateId, 在容器中的索引位置</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> getIndex(updateId);</span><br><span class="line">        <span class="comment">// 2. 将该索引位置, 使用新的学生对象替换</span></span><br><span class="line">        stus[index] = newStu;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​</p>
+</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
